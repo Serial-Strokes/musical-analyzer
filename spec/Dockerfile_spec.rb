@@ -4,7 +4,9 @@ require 'serverspec'
 describe 'Dockerfile' do
 
   before(:all) do
-    image = Docker::Image.build_from_dir('.')
+    image = Docker::Image.build_from_dir('.') do |v|
+      puts v
+    end
     image.tag(repo: 'serial-strokes/musical-analyzer', tag: 'latest')
     @container = Docker::Container.create('Cmd' => ['sh'], 'Tty' => true, 'Image' => image.id)
     @container.start
