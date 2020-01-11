@@ -5,14 +5,10 @@
 - Ruby (to run the tests)
 - Docker
 
-## Run tests
+## Test and build
 
     bundle install --binstubs --path vendor/bundle
     bundle exec rspec --format doc
-
-## Build
-
-    docker build -t serial-strokes/musical-analyzer .
 
 ## Run
 
