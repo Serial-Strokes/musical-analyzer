@@ -1,18 +1,11 @@
-require 'docker'
 require 'serverspec'
 
 describe 'Dockerfile' do
 
   before(:all) do
-    image = Docker::Image.build_from_dir('.') do |v|
-      puts v
-    end
-    image.tag(repo: 'serial-strokes/musical-analyzer', tag: 'latest')
-    @container = Docker::Container.create('Cmd' => ['sh'], 'Tty' => true, 'Image' => image.id)
-    @container.start
     set :os, family: :debian
     set :backend, :docker
-    set :docker_container, @container.id
+    set :docker_container, $ma_container.id
   end
 
   it 'should have installed the right python version' do
@@ -48,11 +41,6 @@ describe 'Dockerfile' do
 
   def pip_check(version = '')
     command("pip#{version} check").stdout
-  end
-
-  after(:all) do
-    @container.stop
-    @container.remove
   end
 
  end

@@ -14,11 +14,13 @@ RUN apt-get update && \
 
 # https://pypi.org/project/...
 RUN pip install --no-cache-dir \
-    "cython==0.29.14" \
-    "librosa==0.7.1" \
-    "numpy==1.18.1" \
-    "scikit-learn==0.22.1" \
-    "scipy==1.4.1" && \
+    "click==7.*" \
+    "cython==0.29.*" \
+    "librosa==0.7.*" \
+    "numpy==1.18.*" \
+    "pytest==5.3.*" \
+    "scikit-learn==0.22.*" \
+    "scipy==1.4.*" && \
     rm -rf /root/.cache
 
 ARG username="musical-analyzer"
@@ -30,6 +32,6 @@ RUN groupadd --system "${username}" && \
 USER "${username}"
 WORKDIR "${userhome}"
 
-COPY src/main.py .
+COPY src/ .
 
-CMD [ "python", "./main.py" ]
+ENTRYPOINT [ "python", "./main.py" ]
