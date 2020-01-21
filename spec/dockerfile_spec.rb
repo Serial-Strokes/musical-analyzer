@@ -1,6 +1,6 @@
 require 'serverspec'
 
-describe 'Dockerfile' do
+describe 'Musical Analyzer Dockerfile' do
 
   before(:all) do
     set :os, family: :debian

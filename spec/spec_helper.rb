@@ -15,15 +15,15 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   config.before(:suite) do
-    ma_image = Docker::Image.build_from_dir('.') do |v|
+    $ma_image = Docker::Image.build_from_dir('.') do |v|
       puts v
     end
-    ma_image.tag(repo: 'serial-strokes/musical-analyzer', tag: 'latest')
+    $ma_image.tag(repo: 'serial-strokes/musical-analyzer', tag: 'latest')
     $ma_container = Docker::Container.create(
       'Entrypoint' => ['sh'],
       'Cmd' => [],
       'Tty' => true,
-      'Image' => ma_image.id
+      'Image' => $ma_image.id
     )
     $ma_container.start
   end

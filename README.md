@@ -1,4 +1,4 @@
-# Musical Analyzer
+# Musical Analyzer | Serial Strokes
 
 ## Dependencies
 
@@ -18,8 +18,13 @@ To execute docker build only:
 
 To execute python tests only (they depends on docker build):
 
-    docker run -it --rm serial-strokes/musical-analyzer:latest pytest -rA
+    docker run -it --entrypoint="" --rm serial-strokes/musical-analyzer:latest pytest -rA
 
 ## Run
 
-    docker run -it --rm serial-strokes/musical-analyzer:atest beat_tracker /usr/local/lib/python3.8/site-packages/librosa/util/example_data/Kevin_MacLeod_-_Vibe_Ace.ogg
+    docker run \
+        -it \
+        --rm \
+        --volume serial-strokes-library-volume:/opt/library:ro \
+        serial-strokes/musical-analyzer:latest \
+        beat_tracker /usr/local/lib/python3.8/site-packages/librosa/util/example_data/Kevin_MacLeod_-_Vibe_Ace.ogg
