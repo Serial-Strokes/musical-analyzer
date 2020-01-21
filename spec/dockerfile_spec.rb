@@ -24,7 +24,7 @@ describe 'Musical Analyzer Dockerfile' do
 
   it 'should have installed the required python packages' do
     expected_pip_check = 'No broken requirements found.'
-    expected_librosa_version = '0.7.1'
+    expected_librosa_version = '0.7.2'
 
     expect(pip_check).to include(expected_pip_check)
     expect(pip_check'3').to include(expected_pip_check)
